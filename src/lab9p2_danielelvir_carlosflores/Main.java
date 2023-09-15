@@ -1,6 +1,10 @@
 
 package lab9p2_danielelvir_carlosflores;
 
+import javax.swing.JOptionPane;
+import java.sql.SQLException;
+
+
 
 public class Main extends javax.swing.JFrame {
 
@@ -134,6 +138,11 @@ public class Main extends javax.swing.JFrame {
         jLabel20.setText("Profit:");
 
         btn_addregistro.setText("Agregar Registro");
+        btn_addregistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addregistroMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -477,6 +486,68 @@ public class Main extends javax.swing.JFrame {
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void btn_addregistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addregistroMouseClicked
+        //agregar
+        Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
+        db.conectar();
+        try {
+            String oid = tf_orderid.getText();
+            String shipMode = tf_shipmode.getText();
+            String segment = tf_segment.getText();
+            String state = tf_state.getText();
+            String pdID = tf_productid.getText();
+            String pName = tf_productname.getText();
+            String sales = tf_sales.getText();
+            String orderdate = tf_orderdate.getText();
+            String customerid = tf_customerid.getText();
+            String country = tf_country.getText();
+            String pCode = tf_postalcode.getText();
+            String category = tf_category.getText();
+            String quantity = tf_quantity.getText();
+            String shipDate = tf_shipdate.getText();
+            String customerName = tf_customername.getText();
+            String city = tf_city.getText();
+            String region = tf_region.getText();
+            String subCategory = tf_subcategory.getText();
+            String discount = tf_discount.getText();
+            String profit = tf_profit.getText();
+            
+            
+            
+            db.query.execute("INSERT INTO TenRecord"
+                    + "([Order ID], [Order Date], [Ship Date], [Customer ID], "
+                    + "[Customer Name], Segment, Country, City, State, [Postal Code], "
+                    + "Region, [Product ID], Category, [Sub-Category], [Product Name], "
+                    + "Sales, Quantity, Discount, Profit)"
+                    + " VALUES ('" + oid + "', '" + orderdate + "', '" + shipDate + "', '" + customerid + "', '" + customerName + "','" + segment + "','" + country + "','" + city + "','" + state + "','" + pCode + "','" + region + "','" + pdID + "','" + category + "','" + subCategory + "','" + pName + "','" + sales + "','" + quantity + "','" + discount + "','" + profit + "')");
+            
+            
+            db.commit();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+        db.desconectar();
+        
+        //agregar
+        /*Dba db = new Dba("./base1.mdb");
+        db.conectar();
+        try {
+            int c;
+            String n;
+            c = Integer.parseInt(JOptionPane.showInputDialog("Codigo"));
+            n = JOptionPane.showInputDialog("Nombre");
+            db.query.execute("INSERT INTO alumnos"
+                    + " (cuenta,nombre)"
+                    + " VALUES ('" + c + "', '" + n + "')");
+            db.commit();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();*/
+    }//GEN-LAST:event_btn_addregistroMouseClicked
 
     /**
      * @param args the command line arguments

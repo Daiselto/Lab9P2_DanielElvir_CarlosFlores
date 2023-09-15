@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package lab9p2_danielelvir_carlosflores;
 
-/**
- *
- * @author HP
- */
+
 public class Details {
     private String Order_ID, Product_ID, Sales, Quantity, Discount, Profit;
 
