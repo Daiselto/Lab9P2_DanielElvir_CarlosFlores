@@ -6,47 +6,36 @@ package lab9p2_danielelvir_carlosflores;
 
 import javax.swing.JProgressBar;
 
-/**
- *
- * @author HP
- */
-public class ProgressBars implements Runnable{
-    private JProgressBar avan = new JProgressBar();
+public class ProgressBars implements Runnable {
+
+    private JProgressBar avan;
     private int seg;
     private int avanz;
-    private boolean vive=true;
-    private boolean avanzar=true;
+    private boolean vive = true;
+    private boolean avanzar = true;
 
-    public ProgressBars() {
-    }
-
-    public ProgressBars(int seg) {
-        this.seg = seg;
-    }
-
-    public ProgressBars(int seg, int avanz) {
+    public ProgressBars(int seg, int avanz, JProgressBar avan) {
         this.seg = seg;
         this.avanz = avanz;
+        this.avan = avan;
     }
-    
-    
 
     @Override
     public void run() {
-        while(vive){
-            if(avanzar){
-                avan.setValue(avan.getValue()+1);
-                if(avan.getValue()==avanz){
-                    vive=false;
-                }                
-            } 
-            
+        while (vive) {
+            if (avanzar) {                
+                avan.setValue(avan.getValue() + 1);
+                if (avan.getValue() == avanz) {
+                    vive = false;
+                    avan.setValue(0);                    
+                }
+            }
+
             try {
                 Thread.sleep(seg);
             } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
         }
     }
-    
-    
 }
