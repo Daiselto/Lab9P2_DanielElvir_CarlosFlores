@@ -27,6 +27,7 @@ public class ProgressBars implements Runnable {
                 avan.setValue(avan.getValue() + 1);
                 if (avan.getValue() == avanz) {
                     vive = false;
+                    System.out.println("Progress Bar llena");
                     avan.setValue(0);                    
                 }
             }
