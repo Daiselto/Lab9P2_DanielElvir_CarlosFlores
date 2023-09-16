@@ -558,6 +558,7 @@ public class Main extends javax.swing.JFrame {
                     + "Sales, Quantity, Discount, Profit)"
                     + " VALUES ('" + oid + "', '" + orderdate + "', '" + shipDate + "', '" + customerid + "', '" + customerName + "','" + segment + "','" + country + "','" + city + "','" + state + "','" + pCode + "','" + region + "','" + pdID + "','" + category + "','" + subCategory + "','" + pName + "','" + sales + "','" + quantity + "','" + discount + "','" + profit + "')");
 
+            
             db.commit();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -589,22 +590,7 @@ public class Main extends javax.swing.JFrame {
         tf_discount.setText("");
         tf_profit.setText("");
 
-        //agregar
-        /*Dba db = new Dba("./base1.mdb");
-        db.conectar();
-        try {
-            int c;
-            String n;
-            c = Integer.parseInt(JOptionPane.showInputDialog("Codigo"));
-            n = JOptionPane.showInputDialog("Nombre");
-            db.query.execute("INSERT INTO alumnos"
-                    + " (cuenta,nombre)"
-                    + " VALUES ('" + c + "', '" + n + "')");
-            db.commit();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        db.desconectar();*/
+        
     }//GEN-LAST:event_btn_addregistroMouseClicked
 
     private void btn_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordersMouseClicked
