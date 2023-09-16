@@ -107,7 +107,11 @@ public class ProgressBars implements Runnable {
                     vive = false;
                     //System.out.println("Progress Bar llena");
                     avan.setValue(0);
-                    tA.setText(datos);
+                    try {
+                       tA.setText(datos); 
+                    } catch (Exception e) {
+                    }
+                    
                 }
             }
 

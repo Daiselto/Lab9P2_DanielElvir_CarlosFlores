@@ -199,7 +199,9 @@ public class Main extends javax.swing.JFrame {
                         .addGap(87, 87, 87)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel15))
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tf_shipdate, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,16 +237,11 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addGap(18, 18, 18)
                             .addComponent(tf_productname, javax.swing.GroupLayout.PREFERRED_SIZE, 873, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(374, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_addregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(974, Short.MAX_VALUE)
-                    .addComponent(jLabel15)
-                    .addGap(321, 321, 321)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +252,8 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(tf_orderid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(tf_orderdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_shipdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_shipdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -317,15 +315,11 @@ public class Main extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(btn_addregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(25, 25, 25)
-                    .addComponent(jLabel15)
-                    .addContainerGap(432, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Agregar Registro", jPanel3);
 
+        btn_details.setBackground(Color.orange);
         btn_details.setText("Details");
         btn_details.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -333,6 +327,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btn_customers.setBackground(Color.RED);
         btn_customers.setText("Customers");
         btn_customers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -347,6 +342,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btn_orders.setBackground(Color.GREEN);
+        btn_orders.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         btn_orders.setText("Orders");
         btn_orders.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -359,6 +356,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        btn_products.setBackground(Color.BLUE);
         btn_products.setText("Products");
         btn_products.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -414,7 +412,7 @@ public class Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Order ID", "Oder Date", "Ship Date", "Ship Mode", "Customer ID", "Customer Name", "Segment", "Country", "City", "State", "Postal Code", "Region", "Product ID", "Sub-Category", "Product Name", "Sales", "Quantity", "Discount", "Profit"
+                "ID", "Order ID", "Oder Date", "Customer ID", "Country", "City", "Product ID", "Sales"
             }
         ));
         jScrollPane2.setViewportView(jt_table);
@@ -569,6 +567,27 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ocurrio un error");
         }
         db.desconectar();
+        
+        tf_orderid.setText("");
+        tf_shipmode.setText("");
+        tf_segment.setText("");
+        tf_state.setText("");
+        tf_productid.setText("");
+        tf_productname.setText("");
+        tf_sales.setText("");
+        tf_orderdate.setText("");
+        tf_customerid.setText("");
+        tf_country.setText("");
+        tf_postalcode.setText("");
+        tf_category.setText("");
+        tf_quantity.setText("");
+        tf_shipdate.setText("");
+        tf_customername.setText("");
+        tf_city.setText("");
+        tf_region.setText("");
+        tf_subcategory.setText("");
+        tf_discount.setText("");
+        tf_profit.setText("");
 
         //agregar
         /*Dba db = new Dba("./base1.mdb");
@@ -751,7 +770,7 @@ public class Main extends javax.swing.JFrame {
         db.conectar();
 
         try {
-            db.query.execute("SELECT a.ID, a.[Order ID], a. [Order Date], a.[Ship Date], a.[Ship Mode], a.[Customer ID], a.[Customer Name], a.Segment, a.Country, a.City, a.State, a.[Postal Code], a.Region, a.[Product ID], a.Category, a.[Sub-Category], a.[Product Name], a.[Product Name] a.Sales, a.Quantity, a.Discount, a.Profit "
+            db.query.execute("SELECT a.ID, a.[Order ID], a.[Order Date], a.[Customer ID], a.Country, a.City, a.[Product ID], a.Sales "
                     + "FROM TenRecord a");
             ResultSet rs = db.query.getResultSet();
             while (rs.next()) {
@@ -763,19 +782,8 @@ public class Main extends javax.swing.JFrame {
                     rs.getString(5),
                     rs.getString(6),
                     rs.getString(7),
-                    rs.getString(8),
-                    rs.getString(9),
-                    rs.getString(10),
-                    rs.getString(11),
-                    rs.getString(12),
-                    rs.getString(13), 
-                    rs.getString(14),
-                    rs.getString(15),
-                    rs.getString(16),
-                    rs.getString(17),
-                    rs.getString(18),
-                    rs.getString(19),
-                    rs.getString(20)};
+                    rs.getString(8)
+                    };
 
                 m.addRow(row);
 
