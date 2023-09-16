@@ -1,19 +1,16 @@
-
 package lab9p2_danielelvir_carlosflores;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Main extends javax.swing.JFrame {
 
-    
     public Main() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,7 +70,7 @@ public class Main extends javax.swing.JFrame {
         textarea = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jt_tabla = new javax.swing.JTable();
+        jt_table = new javax.swing.JTable();
         btn_update = new javax.swing.JButton();
         btn_elim = new javax.swing.JButton();
 
@@ -242,7 +239,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(40, 40, 40))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addContainerGap(606, Short.MAX_VALUE)
+                    .addContainerGap(974, Short.MAX_VALUE)
                     .addComponent(jLabel15)
                     .addGap(321, 321, 321)))
         );
@@ -264,7 +261,7 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(tf_shipmode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(tf_customerid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -321,7 +318,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(25, 25, 25)
                     .addComponent(jLabel15)
-                    .addContainerGap(424, Short.MAX_VALUE)))
+                    .addContainerGap(432, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Agregar Registro", jPanel3);
@@ -388,7 +385,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(btn_customers, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_products, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 531, Short.MAX_VALUE)
                         .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
         );
@@ -404,22 +401,27 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(btn_products, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Listar Registro", jPanel4);
 
-        jt_tabla.setModel(new javax.swing.table.DefaultTableModel(
+        jt_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Row ID", "Order ID", "Customer ID", "Country", "City", "Product ID", "Sales"
+                "ID", "Order ID", "Oder Date", "Ship Date", "Ship Mode", "Customer ID", "Customer Name", "Segment", "Country", "City", "State", "Postal Code", "Region", "Product ID", "Sub-Category", "Product Name", "Sales", "Quantity", "Discount", "Profit"
             }
         ));
-        jScrollPane2.setViewportView(jt_tabla);
+        jScrollPane2.setViewportView(jt_table);
 
         btn_update.setText("Update Tabla");
+        btn_update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_updateMouseClicked(evt);
+            }
+        });
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_updateActionPerformed(evt);
@@ -427,6 +429,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         btn_elim.setText("Eliminar Registro");
+        btn_elim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_elimMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -435,12 +442,10 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 931, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1029, Short.MAX_VALUE)
                         .addComponent(btn_elim, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44))))
         );
@@ -453,7 +458,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_elim, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Eliminar Registro", jPanel2);
@@ -537,25 +542,22 @@ public class Main extends javax.swing.JFrame {
             String subCategory = tf_subcategory.getText();
             String discount = tf_discount.getText();
             String profit = tf_profit.getText();
-            
-            
-            
+
             db.query.execute("INSERT INTO TenRecord"
                     + "([Order ID], [Order Date], [Ship Date], [Customer ID], "
                     + "[Customer Name], Segment, Country, City, State, [Postal Code], "
                     + "Region, [Product ID], Category, [Sub-Category], [Product Name], "
                     + "Sales, Quantity, Discount, Profit)"
                     + " VALUES ('" + oid + "', '" + orderdate + "', '" + shipDate + "', '" + customerid + "', '" + customerName + "','" + segment + "','" + country + "','" + city + "','" + state + "','" + pCode + "','" + region + "','" + pdID + "','" + category + "','" + subCategory + "','" + pName + "','" + sales + "','" + quantity + "','" + discount + "','" + profit + "')");
-            
-            
+
             db.commit();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         db.desconectar();
-        
+
         //agregar
         /*Dba db = new Dba("./base1.mdb");
         db.conectar();
@@ -579,19 +581,19 @@ public class Main extends javax.swing.JFrame {
         db.conectar();
         try {
             db.query.execute("SELECT a.[Order ID], a.[Order Date], a.[Ship Date], a.[Ship Mode], a.[Customer ID] "
-                            + "FROM TenRecord a");
+                    + "FROM TenRecord a");
             textarea.setText("");
             ResultSet rs = db.query.getResultSet();
-            String generado="";
-            int numCust=1;
+            String generado = "";
+            int numCust = 1;
             while (rs.next()) {
-                generado += "Order: "+numCust+"\n";
-                generado+="Order ID: "+rs.getString(1)+"\n";
-                generado+="Order Date: "+rs.getString(2)+"\n";
-                generado+="Ship Date: "+rs.getString(3)+"\n";
-                generado+="Ship Mode: "+rs.getString(4)+"\n";
-                generado+="Customer ID: "+rs.getString(5)+"\n"; 
-                generado+="\n";
+                generado += "Order: " + numCust + "\n";
+                generado += "Order ID: " + rs.getString(1) + "\n";
+                generado += "Order Date: " + rs.getString(2) + "\n";
+                generado += "Ship Date: " + rs.getString(3) + "\n";
+                generado += "Ship Mode: " + rs.getString(4) + "\n";
+                generado += "Customer ID: " + rs.getString(5) + "\n";
+                generado += "\n";
                 numCust++;
             }
             textarea.setText(generado);
@@ -607,20 +609,20 @@ public class Main extends javax.swing.JFrame {
         db.conectar();
         try {
             db.query.execute("SELECT a.[Order ID], a.[Product ID], a.Sales, a.Quantity, a.Discount, a.Profit "
-                            + "FROM TenRecord a");
+                    + "FROM TenRecord a");
             ResultSet rs = db.query.getResultSet();
             textarea.setText("");
-            String generado="";
-            int numCust=1;
+            String generado = "";
+            int numCust = 1;
             while (rs.next()) {
-                generado += "Detail: "+numCust+"\n";
-                generado+="Order ID: "+rs.getString(1)+"\n";
-                generado+="Product ID: "+rs.getString(2)+"\n";
-                generado+="Sales: "+rs.getString(3)+"\n";
-                generado+="Quantity: "+rs.getString(4)+"\n";
-                generado+="Discount: "+rs.getString(5)+"\n";
-                generado+="Profit: "+rs.getString(6)+"\n";
-                generado+="\n";
+                generado += "Detail: " + numCust + "\n";
+                generado += "Order ID: " + rs.getString(1) + "\n";
+                generado += "Product ID: " + rs.getString(2) + "\n";
+                generado += "Sales: " + rs.getString(3) + "\n";
+                generado += "Quantity: " + rs.getString(4) + "\n";
+                generado += "Discount: " + rs.getString(5) + "\n";
+                generado += "Profit: " + rs.getString(6) + "\n";
+                generado += "\n";
                 numCust++;
             }
             textarea.setText(generado);
@@ -635,22 +637,22 @@ public class Main extends javax.swing.JFrame {
         db.conectar();
         try {
             db.query.execute("SELECT a.[Customer ID], a.[Customer Name], a.Segment, a.Country, a.City, a.State, a.[Postal Code], a.Region "
-                            + "FROM TenRecord a");
+                    + "FROM TenRecord a");
             ResultSet rs = db.query.getResultSet();
             textarea.setText("");
-            String generado="";
-            int numCust=1;
+            String generado = "";
+            int numCust = 1;
             while (rs.next()) {
-                generado += "Customer: "+numCust+"\n";
-                generado+="Customer ID: "+rs.getString(1)+"\n";
-                generado+="Customer Name: "+rs.getString(2)+"\n";
-                generado+="Segment: "+rs.getString(3)+"\n";
-                generado+="Country: "+rs.getString(4)+"\n";
-                generado+="City: "+rs.getString(5)+"\n";
-                generado+="State: "+rs.getString(6)+"\n";
-                generado+="Postal Code: "+rs.getString(7)+"\n";
-                generado+="Region: "+rs.getString(8)+"\n";
-                generado+="\n";
+                generado += "Customer: " + numCust + "\n";
+                generado += "Customer ID: " + rs.getString(1) + "\n";
+                generado += "Customer Name: " + rs.getString(2) + "\n";
+                generado += "Segment: " + rs.getString(3) + "\n";
+                generado += "Country: " + rs.getString(4) + "\n";
+                generado += "City: " + rs.getString(5) + "\n";
+                generado += "State: " + rs.getString(6) + "\n";
+                generado += "Postal Code: " + rs.getString(7) + "\n";
+                generado += "Region: " + rs.getString(8) + "\n";
+                generado += "\n";
                 numCust++;
             }
             textarea.setText(generado);
@@ -665,18 +667,18 @@ public class Main extends javax.swing.JFrame {
         db.conectar();
         try {
             db.query.execute("SELECT a.[Product ID], a.Category, a.[Sub-Category], a.[Product Name] "
-                            + "FROM TenRecord a");
+                    + "FROM TenRecord a");
             ResultSet rs = db.query.getResultSet();
             textarea.setText("");
-            String generado="";
-            int numCust=1;
+            String generado = "";
+            int numCust = 1;
             while (rs.next()) {
-                generado += "Product: "+numCust+"\n";
-                generado+="Product ID: "+rs.getString(1)+"\n";
-                generado+="Category: "+rs.getString(2)+"\n";
-                generado+="Sub-Category: "+rs.getString(3)+"\n";
-                generado+="Product Name: "+rs.getString(4)+"\n";                
-                generado+="\n";
+                generado += "Product: " + numCust + "\n";
+                generado += "Product ID: " + rs.getString(1) + "\n";
+                generado += "Category: " + rs.getString(2) + "\n";
+                generado += "Sub-Category: " + rs.getString(3) + "\n";
+                generado += "Product Name: " + rs.getString(4) + "\n";
+                generado += "\n";
                 numCust++;
             }
             textarea.setText(generado);
@@ -689,6 +691,72 @@ public class Main extends javax.swing.JFrame {
     private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked
         textarea.setText("");
     }//GEN-LAST:event_btn_clearMouseClicked
+
+    private void btn_updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_updateMouseClicked
+        
+        
+        DefaultTableModel m = (DefaultTableModel) jt_table.getModel();
+        
+        m.setRowCount(0);
+        
+        Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
+        db.conectar();
+
+        try {
+            db.query.execute("SELECT a.ID, a.[Order ID], a. [Order Date], a.[Ship Date], a.[Ship Mode], a.[Customer ID], a.[Customer Name], a.Segment, a.Country, a.City, a.State, a.[Postal Code], a.Region, a.[Product ID], a.Category, a.[Sub-Category], a.[Product Name], a.[Product Name] a.Sales, a.Quantity, a.Discount, a.Profit "
+                    + "FROM TenRecord a");
+            ResultSet rs = db.query.getResultSet();
+            while (rs.next()) {
+                
+                Object[] row = {rs.getString(1), 
+                    rs.getString(2), 
+                    rs.getString(3), 
+                    rs.getString(4), 
+                    rs.getString(5),
+                    rs.getString(6), 
+                    rs.getString(7), 
+                    rs.getString(8), 
+                    rs.getString(9),
+                    rs.getString(10), 
+                    rs.getString(11), 
+                    rs.getString(12), 
+                    rs.getString(13),rs.getString(14), 
+                    rs.getString(15), 
+                    rs.getString(16), 
+                    rs.getString(17),
+                rs.getString(18), 
+                rs.getString(19), 
+                rs.getString(20)};
+
+                m.addRow(row);
+
+                jt_table.setModel(m);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        db.desconectar();
+    }//GEN-LAST:event_btn_updateMouseClicked
+
+    private void btn_elimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_elimMouseClicked
+        try {
+            Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
+            db.conectar();
+            
+            try {
+                db.query.execute("delete from TenRecord where id = " + (jt_table.getValueAt(jt_table.getSelectedRow(), 0)));
+                db.commit();
+                
+                JOptionPane.showMessageDialog(this, "Eliminado exitosamente!");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            db.desconectar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un error");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_elimMouseClicked
 
     /**
      * @param args the command line arguments
@@ -761,7 +829,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jt_tabla;
+    private javax.swing.JTable jt_table;
     private javax.swing.JProgressBar pb_bar;
     private javax.swing.JTextArea textarea;
     private javax.swing.JTextField tf_category;
