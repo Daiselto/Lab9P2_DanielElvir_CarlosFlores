@@ -1,5 +1,6 @@
 package lab9p2_danielelvir_carlosflores;
 
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -75,6 +76,8 @@ public class Main extends javax.swing.JFrame {
         btn_elim = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pb_bar.setStringPainted(true);
 
         jLabel1.setText("Order ID: ");
 
@@ -519,6 +522,13 @@ public class Main extends javax.swing.JFrame {
 
     private void btn_addregistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addregistroMouseClicked
         //agregar
+        int avanz = 6;
+        pb_bar.setMaximum(avanz);
+        ProgressBars xd = new ProgressBars(1000, avanz, pb_bar, Color.yellow);
+
+        Thread run = new Thread(xd);
+        run.start();
+
         Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
         db.conectar();
         try {
@@ -553,8 +563,10 @@ public class Main extends javax.swing.JFrame {
             db.commit();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocurrio un error");
         } catch (Exception ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocurrio un error");
         }
         db.desconectar();
 
@@ -577,14 +589,18 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addregistroMouseClicked
 
     private void btn_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordersMouseClicked
+
         Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
         db.conectar();
         try {
             db.query.execute("SELECT a.[Order ID], a.[Order Date], a.[Ship Date], a.[Ship Mode], a.[Customer ID] "
                     + "FROM TenRecord a");
             textarea.setText("");
+
             ResultSet rs = db.query.getResultSet();
+
             String generado = "";
+
             int numCust = 1;
             while (rs.next()) {
                 generado += "Order: " + numCust + "\n";
@@ -596,9 +612,18 @@ public class Main extends javax.swing.JFrame {
                 generado += "\n";
                 numCust++;
             }
-            textarea.setText(generado);
+            
+
+            int avanz = 4;
+            pb_bar.setMaximum(avanz);
+            ProgressBars xd = new ProgressBars(1000, avanz, pb_bar, generado, textarea, Color.green);
+
+            Thread run = new Thread(xd);
+            run.start();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocurrio un error");
         }
         db.desconectar();
 
@@ -625,9 +650,17 @@ public class Main extends javax.swing.JFrame {
                 generado += "\n";
                 numCust++;
             }
-            textarea.setText(generado);
+            //textarea.setText(generado);
+            
+            int avanz = 5;
+            pb_bar.setMaximum(avanz);
+            ProgressBars xd = new ProgressBars(1000, avanz, pb_bar, generado, textarea, Color.orange);
+
+            Thread run = new Thread(xd);
+            run.start();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocurrio un error");
         }
         db.desconectar();
     }//GEN-LAST:event_btn_detailsMouseClicked
@@ -655,9 +688,17 @@ public class Main extends javax.swing.JFrame {
                 generado += "\n";
                 numCust++;
             }
-            textarea.setText(generado);
+            //textarea.setText(generado);
+            int avanz = 6;
+            pb_bar.setMaximum(avanz);
+            ProgressBars xd = new ProgressBars(1000, avanz, pb_bar, generado, textarea, Color.red);
+
+            Thread run = new Thread(xd);
+            run.start();
+            
         } catch (SQLException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocurrio un error");
         }
         db.desconectar();
     }//GEN-LAST:event_btn_customersMouseClicked
@@ -681,9 +722,17 @@ public class Main extends javax.swing.JFrame {
                 generado += "\n";
                 numCust++;
             }
-            textarea.setText(generado);
+            //textarea.setText(generado);
+            
+            int avanz = 3;
+            pb_bar.setMaximum(avanz);
+            ProgressBars xd = new ProgressBars(1000, avanz, pb_bar, generado, textarea, Color.blue);
+
+            Thread run = new Thread(xd);
+            run.start();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocurrio un error");
         }
         db.desconectar();
     }//GEN-LAST:event_btn_productsMouseClicked
@@ -693,12 +742,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_clearMouseClicked
 
     private void btn_updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_updateMouseClicked
-        
-        
+
         DefaultTableModel m = (DefaultTableModel) jt_table.getModel();
-        
+
         m.setRowCount(0);
-        
+
         Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
         db.conectar();
 
@@ -707,26 +755,27 @@ public class Main extends javax.swing.JFrame {
                     + "FROM TenRecord a");
             ResultSet rs = db.query.getResultSet();
             while (rs.next()) {
-                
-                Object[] row = {rs.getString(1), 
-                    rs.getString(2), 
-                    rs.getString(3), 
-                    rs.getString(4), 
+
+                Object[] row = {rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
                     rs.getString(5),
-                    rs.getString(6), 
-                    rs.getString(7), 
-                    rs.getString(8), 
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getString(8),
                     rs.getString(9),
-                    rs.getString(10), 
-                    rs.getString(11), 
-                    rs.getString(12), 
-                    rs.getString(13),rs.getString(14), 
-                    rs.getString(15), 
-                    rs.getString(16), 
+                    rs.getString(10),
+                    rs.getString(11),
+                    rs.getString(12),
+                    rs.getString(13), 
+                    rs.getString(14),
+                    rs.getString(15),
+                    rs.getString(16),
                     rs.getString(17),
-                rs.getString(18), 
-                rs.getString(19), 
-                rs.getString(20)};
+                    rs.getString(18),
+                    rs.getString(19),
+                    rs.getString(20)};
 
                 m.addRow(row);
 
@@ -734,20 +783,30 @@ public class Main extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Ocurrio un error");
         }
         db.desconectar();
     }//GEN-LAST:event_btn_updateMouseClicked
 
     private void btn_elimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_elimMouseClicked
         try {
+
+            int avanz = 5;
+            pb_bar.setMaximum(avanz);
+            ProgressBars xd = new ProgressBars(1000, avanz, pb_bar, new Color(160, 11, 246));
+
+            Thread run = new Thread(xd);
+            run.start();
+
+            //run.join();
             Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
             db.conectar();
-            
+
             try {
+
                 db.query.execute("delete from TenRecord where id = " + (jt_table.getValueAt(jt_table.getSelectedRow(), 0)));
                 db.commit();
-                
-                JOptionPane.showMessageDialog(this, "Eliminado exitosamente!");
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -755,6 +814,7 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un error");
             e.printStackTrace();
+
         }
     }//GEN-LAST:event_btn_elimMouseClicked
 

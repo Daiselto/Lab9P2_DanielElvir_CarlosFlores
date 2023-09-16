@@ -61,6 +61,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JProgressBar" name="pb_bar">
+          <Properties>
+            <Property name="stringPainted" type="boolean" value="true"/>
+          </Properties>
         </Component>
         <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
 
