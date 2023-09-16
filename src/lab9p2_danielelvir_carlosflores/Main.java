@@ -1,7 +1,7 @@
 
 package lab9p2_danielelvir_carlosflores;
 
-import javax.swing.JOptionPane;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -327,12 +327,32 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1.addTab("Agregar Registro", jPanel3);
 
         btn_details.setText("Details");
+        btn_details.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_detailsMouseClicked(evt);
+            }
+        });
 
         btn_customers.setText("Customers");
+        btn_customers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_customersMouseClicked(evt);
+            }
+        });
 
         btn_clear.setText("Clear");
+        btn_clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clearMouseClicked(evt);
+            }
+        });
 
         btn_orders.setText("Orders");
+        btn_orders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_ordersMouseClicked(evt);
+            }
+        });
         btn_orders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ordersActionPerformed(evt);
@@ -340,6 +360,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         btn_products.setText("Products");
+        btn_products.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_productsMouseClicked(evt);
+            }
+        });
 
         textarea.setColumns(20);
         textarea.setRows(5);
@@ -548,6 +573,122 @@ public class Main extends javax.swing.JFrame {
         }
         db.desconectar();*/
     }//GEN-LAST:event_btn_addregistroMouseClicked
+
+    private void btn_ordersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordersMouseClicked
+        Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
+        db.conectar();
+        try {
+            db.query.execute("SELECT a.[Order ID], a.[Order Date], a.[Ship Date], a.[Ship Mode], a.[Customer ID] "
+                            + "FROM TenRecord a");
+            textarea.setText("");
+            ResultSet rs = db.query.getResultSet();
+            String generado="";
+            int numCust=1;
+            while (rs.next()) {
+                generado += "Order: "+numCust+"\n";
+                generado+="Order ID: "+rs.getString(1)+"\n";
+                generado+="Order Date: "+rs.getString(2)+"\n";
+                generado+="Ship Date: "+rs.getString(3)+"\n";
+                generado+="Ship Mode: "+rs.getString(4)+"\n";
+                generado+="Customer ID: "+rs.getString(5)+"\n"; 
+                generado+="\n";
+                numCust++;
+            }
+            textarea.setText(generado);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();
+
+    }//GEN-LAST:event_btn_ordersMouseClicked
+
+    private void btn_detailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_detailsMouseClicked
+        Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
+        db.conectar();
+        try {
+            db.query.execute("SELECT a.[Order ID], a.[Product ID], a.Sales, a.Quantity, a.Discount, a.Profit "
+                            + "FROM TenRecord a");
+            ResultSet rs = db.query.getResultSet();
+            textarea.setText("");
+            String generado="";
+            int numCust=1;
+            while (rs.next()) {
+                generado += "Detail: "+numCust+"\n";
+                generado+="Order ID: "+rs.getString(1)+"\n";
+                generado+="Product ID: "+rs.getString(2)+"\n";
+                generado+="Sales: "+rs.getString(3)+"\n";
+                generado+="Quantity: "+rs.getString(4)+"\n";
+                generado+="Discount: "+rs.getString(5)+"\n";
+                generado+="Profit: "+rs.getString(6)+"\n";
+                generado+="\n";
+                numCust++;
+            }
+            textarea.setText(generado);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();
+    }//GEN-LAST:event_btn_detailsMouseClicked
+
+    private void btn_customersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_customersMouseClicked
+        Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
+        db.conectar();
+        try {
+            db.query.execute("SELECT a.[Customer ID], a.[Customer Name], a.Segment, a.Country, a.City, a.State, a.[Postal Code], a.Region "
+                            + "FROM TenRecord a");
+            ResultSet rs = db.query.getResultSet();
+            textarea.setText("");
+            String generado="";
+            int numCust=1;
+            while (rs.next()) {
+                generado += "Customer: "+numCust+"\n";
+                generado+="Customer ID: "+rs.getString(1)+"\n";
+                generado+="Customer Name: "+rs.getString(2)+"\n";
+                generado+="Segment: "+rs.getString(3)+"\n";
+                generado+="Country: "+rs.getString(4)+"\n";
+                generado+="City: "+rs.getString(5)+"\n";
+                generado+="State: "+rs.getString(6)+"\n";
+                generado+="Postal Code: "+rs.getString(7)+"\n";
+                generado+="Region: "+rs.getString(8)+"\n";
+                generado+="\n";
+                numCust++;
+            }
+            textarea.setText(generado);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();
+    }//GEN-LAST:event_btn_customersMouseClicked
+
+    private void btn_productsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_productsMouseClicked
+        Dba db = new Dba("./BaseDeDatosLab9P2.accdb");
+        db.conectar();
+        try {
+            db.query.execute("SELECT a.[Product ID], a.Category, a.[Sub-Category], a.[Product Name] "
+                            + "FROM TenRecord a");
+            ResultSet rs = db.query.getResultSet();
+            textarea.setText("");
+            String generado="";
+            int numCust=1;
+            while (rs.next()) {
+                generado += "Product: "+numCust+"\n";
+                generado+="Product ID: "+rs.getString(1)+"\n";
+                generado+="Category: "+rs.getString(2)+"\n";
+                generado+="Sub-Category: "+rs.getString(3)+"\n";
+                generado+="Product Name: "+rs.getString(4)+"\n";                
+                generado+="\n";
+                numCust++;
+            }
+            textarea.setText(generado);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();
+    }//GEN-LAST:event_btn_productsMouseClicked
+
+    private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked
+        textarea.setText("");
+    }//GEN-LAST:event_btn_clearMouseClicked
 
     /**
      * @param args the command line arguments

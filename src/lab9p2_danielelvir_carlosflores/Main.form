@@ -522,22 +522,32 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Details"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_detailsMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_customers">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Customers"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_customersMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_clear">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Clear"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_clearMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btn_orders">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Orders"/>
                   </Properties>
                   <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_ordersMouseClicked"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ordersActionPerformed"/>
                   </Events>
                 </Component>
@@ -545,6 +555,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Products"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_productsMouseClicked"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
                   <AuxValues>
